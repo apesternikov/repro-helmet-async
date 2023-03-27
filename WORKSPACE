@@ -29,3 +29,13 @@ npm_translate_lock(
 load("@npm//:repositories.bzl", "npm_repositories")
 
 npm_repositories()
+
+npm_translate_lock(
+    name = "npm_nows",
+    pnpm_lock = "//noworkspaces:pnpm-lock.yaml",
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+
+load("@npm_nows//:repositories.bzl", npm_repositories_nows = "npm_repositories")
+
+npm_repositories_nows()
