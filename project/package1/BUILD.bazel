@@ -1,0 +1,36 @@
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@npm//project/package1:typescript/package_json.bzl", "bin")
+
+npm_link_all_packages(
+    name = "node_modules",
+)
+
+DEPS = [
+    ":node_modules/@types/react",
+    ":node_modules/react",
+    ":node_modules/react-dom",
+    ":node_modules/react-helmet-async",
+]
+
+bin.tsc_test(
+    name = "typecheck",
+    args = [
+        "--noEmit",
+        # "--project=tsconfig.json",
+        "--traceResolution",
+        "--jsx",
+        "react-jsx",
+        "--skipLibCheck",
+        "--esModuleInterop",
+        "--module",
+        "esnext",
+        "--moduleResolution",
+        "node",
+        "src/ComponentUsingHelmet.tsx",
+    ],
+    chdir = package_name(),
+    data = [
+        ":tsconfig.json",
+    ] + glob(["src/*.tsx"]) + DEPS,
+)
+
