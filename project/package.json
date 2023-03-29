@@ -8,5 +8,14 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "pnpm": {
+    "packageExtensions": {
+      "react-helmet-async": {
+        "peerDependencies": {
+          "@types/react": ">=17.0.0"
+        }
+      }
+    }
+  }
 }

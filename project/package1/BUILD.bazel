@@ -9,6 +9,7 @@ bin.tsc_test(
     name = "typecheck",
     args = [
         "--noEmit",
+	"--traceResolution",
     ],
     chdir = package_name(),
     data = [
